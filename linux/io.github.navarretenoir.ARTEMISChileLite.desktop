@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=ARTEMIS Chile Lite
+GenericName=Gestión simple de un curso
+Comment=Estudiantes, asistencia y notas de un curso, sin internet
+Comment[en]=Simple class manager: students, attendance and grades
+Exec=artemis-lite
+Icon=io.github.navarretenoir.ARTEMISChileLite
+Terminal=false
+Categories=Education;Office;
+Keywords=profesor;curso;estudiantes;asistencia;notas;libro de clases;docente;teacher;gradebook;
+StartupWMClass=io.github.navarretenoir.ARTEMISChileLite
+X-Developer=Javiera Navarrete

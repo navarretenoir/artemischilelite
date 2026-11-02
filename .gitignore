@@ -1,0 +1,14 @@
+build/
+android/build/
+android/.gradle/
+windows/build/
+windows/dist/
+windows/instalador/app.nsi
+dist/
+*.apk
+*.idsig
+apple/Recursos/web/
+*.rpm
+*.deb
+*.AppImage
+*.exe

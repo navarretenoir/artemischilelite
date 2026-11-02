@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.navarretenoir.ARTEMISChileLite</id>
+  <name>ARTEMIS Chile Lite</name>
+  <summary>Estudiantes, asistencia y notas de un curso, sin internet</summary>
+  <summary xml:lang="en">Simple class manager: students, attendance and grades</summary>
+  <developer id="io.github.navarretenoir"><name>Javiera Navarrete</name></developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>ARTEMIS Chile Lite es una versión simple de ARTEMIS para profesoras y profesores de Chile: gestiona un curso con su lista de estudiantes, la asistencia diaria y un libro de notas con promedios (escala 1,0 a 7,0). Todo queda en tu dispositivo, sin internet y sin cuentas. Para una versión completa, contacta a la desarrolladora.</p>
+    <ul>
+      <li>Un curso, hasta 45 estudiantes y 5 evaluaciones</li>
+      <li>Asistencia por día con porcentaje por estudiante</li>
+      <li>Notas con promedio y estado de aprobación</li>
+      <li>Diseño Material Design, modo claro y oscuro</li>
+      <li>PIN opcional, respaldo y restauración</li>
+    </ul>
+    <p xml:lang="en">ARTEMIS Chile Lite is a simple version of ARTEMIS for Chilean teachers: one class with its student list, daily attendance and a grade book with averages (1.0 to 7.0 scale). Everything stays on your device, offline, no accounts. For a full version, contact the developer.</p>
+  </description>
+  <url type="homepage">https://github.com/navarretenoir/artemischilelite</url>
+  <url type="vcs-browser">https://gitlab.com/navarretenoir/artemischilelite</url>
+  <url type="bugtracker">https://gitlab.com/navarretenoir/artemischilelite/-/issues</url>
+  <launchable type="desktop-id">io.github.navarretenoir.ARTEMISChileLite.desktop</launchable>
+  <provides><binary>artemis-lite</binary></provides>
+  <categories><category>Education</category></categories>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="1.0" date="2026-11-02"/></releases>
+</component>

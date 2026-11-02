@@ -1,0 +1,2 @@
+ARTEMIS Chile Lite para Linux (GTK 4 + WebKitGTK 6) — desarrollada por Javiera Navarrete. Un curso: estudiantes, asistencia y notas. Sin internet.
+Ejecutar: artemis-lite   (variable ARTEMISLITE_UI para probar otra carpeta de interfaz)

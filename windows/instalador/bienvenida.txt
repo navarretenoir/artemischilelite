@@ -1,0 +1,3 @@
+ARTEMIS Chile Lite es una versión simple de ARTEMIS para llevar un curso: estudiantes, asistencia y notas.
+
+Todos los datos quedan en este equipo y funciona sin internet. Para una versión completa, contacta a la desarrolladora.

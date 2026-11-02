@@ -1,0 +1,7 @@
+ARTEMIS Chile Lite — Acuerdo de uso
+
+Aplicación gratuita y de código abierto (GPL-3.0-or-later) desarrollada por Javiera Navarrete. Es una versión limitada de ARTEMIS: gestiona un solo curso. Para una versión completa, debe contactarse con la desarrolladora.
+
+Privacidad: la aplicación no recopila ni envía datos. La información que usted ingresa (estudiantes, asistencia y notas) se guarda únicamente en este equipo, sin cifrar: puede proteger el acceso con un PIN y hacer respaldos desde Ajustes. Usted es responsable de resguardar y tratar esos datos conforme a la normativa chilena y a las políticas de su establecimiento.
+
+Se entrega «tal cual», sin garantías.
