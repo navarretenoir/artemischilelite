@@ -11,7 +11,7 @@ Android 5.0+ (`.apk`) · Windows 10/11 (instalador) · Linux (RPM, DEB, AppImage
 ## Estructura
 `app/` interfaz web (HTML/CSS/JS, Roboto local) · `android/` · `windows/` · `desktop/` + `linux/` · `apple/` · `pruebas/`
 
-Licencia GPL-3.0-or-later · Desarrollada por **Javiera Navarrete** con asistencia de IA generativa (`AI-USO.md`) · Privacidad: `PRIVACY.md`.
+Licencia GPL-3.0-or-later · Desarrollada por **Javiera Navarrete** Privacidad: `PRIVACY.md`.
 
 ---
 **English.** Simple, limited version of ARTEMIS for Chilean teachers: manage **one class** with students, attendance and a grade book (1.0–7.0). Material Design 3, light/dark, optional PIN and backup. Fully offline, on-device. For a full version, contact the developer: navarrete.noir@gmail.com.
