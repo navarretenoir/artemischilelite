@@ -20,7 +20,11 @@
   </description>
   <url type="homepage">https://github.com/navarretenoir/artemischilelite</url>
   <url type="vcs-browser">https://gitlab.com/navarretenoir/artemischilelite</url>
-  <url type="bugtracker">https://gitlab.com/navarretenoir/artemischilelite/-/issues</url>
+  <url type="bugtracker">https://github.com/navarretenoir/artemischilelite/issues</url>
+  <screenshots>
+    <screenshot type="default"><image>https://raw.githubusercontent.com/navarretenoir/artemischilelite/main/screenshots/1.png</image></screenshot>
+    <screenshot><image>https://raw.githubusercontent.com/navarretenoir/artemischilelite/main/screenshots/2.png</image></screenshot>
+  </screenshots>
   <launchable type="desktop-id">io.github.navarretenoir.ARTEMISChileLite.desktop</launchable>
   <provides><binary>artemis-lite</binary></provides>
   <categories><category>Education</category></categories>
