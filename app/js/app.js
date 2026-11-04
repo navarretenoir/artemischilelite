@@ -15,7 +15,34 @@
   /* ---------- datos ---------- */
   var S = null;
   function vacio() { return { v: 1, docente: "", curso: null, est: [], asis: {}, evals: [], ajustes: { tema: "auto", pin: null } }; }
-  function cargar() { try { var t = localStorage.getItem(KEY); S = t ? JSON.parse(t) : vacio(); } catch (e) { S = vacio(); } S.ajustes = S.ajustes || { tema: "auto", pin: null }; }
+  /* Reconstruye el estado desde datos no confiables (localStorage dañado o un respaldo pegado a mano): solo conserva los campos
+   * y tipos esperados, así una entrada malformada nunca rompe la pantalla. Devuelve null si no es un estado de ARTEMIS Lite. */
+  var ISO = /^\d{4}-\d{2}-\d{2}$/, txt = function (x, max) { return typeof x === "string" ? x.slice(0, max) : ""; };
+  function normalizar(o) {
+    if (!o || typeof o !== "object" || o.v !== 1) return null;
+    var r = vacio(), ids = {};
+    r.docente = txt(o.docente, 80);
+    if (o.curso && typeof o.curso === "object") r.curso = { nombre: txt(o.curso.nombre, 60), asignatura: txt(o.curso.asignatura, 60) };
+    if (r.curso && !r.curso.nombre) r.curso = null;
+    (Array.isArray(o.est) ? o.est : []).slice(0, MAX_EST).forEach(function (e) {
+      if (!e || typeof e !== "object" || typeof e.id !== "string" || !e.id || ids[e.id]) return;
+      ids[e.id] = 1; r.est.push({ id: e.id.slice(0, 24), ap: txt(e.ap, 60), no: txt(e.no, 60) });
+    });
+    Object.keys(o.asis && typeof o.asis === "object" ? o.asis : {}).forEach(function (f) {
+      if (!ISO.test(f) || !o.asis[f] || typeof o.asis[f] !== "object") return;
+      var d = {}; Object.keys(o.asis[f]).forEach(function (id) { var x = o.asis[f][id]; if (ids[id] && (x === "P" || x === "A")) d[id] = x; });
+      r.asis[f] = d;
+    });
+    (Array.isArray(o.evals) ? o.evals : []).slice(0, MAX_EVAL).forEach(function (e) {
+      if (!e || typeof e !== "object" || typeof e.id !== "string") return;
+      var n = {}; Object.keys(e.notas && typeof e.notas === "object" ? e.notas : {}).forEach(function (id) { var x = e.notas[id]; if (ids[id] && typeof x === "number" && x >= 1 && x <= 7) n[id] = x; });
+      r.evals.push({ id: e.id.slice(0, 24), nombre: txt(e.nombre, 40) || "Evaluación", fecha: ISO.test(e.fecha) ? e.fecha : hoy(), notas: n });
+    });
+    var a = o.ajustes && typeof o.ajustes === "object" ? o.ajustes : {}, pin = a.pin;
+    r.ajustes = { tema: a.tema === "claro" || a.tema === "oscuro" ? a.tema : "auto", pin: pin && typeof pin.s === "string" && typeof pin.h === "string" ? { s: pin.s, h: pin.h } : null };
+    return r;
+  }
+  function cargar() { try { var t = localStorage.getItem(KEY); S = (t && normalizar(JSON.parse(t))) || vacio(); } catch (e) { S = vacio(); } }
   function guardar() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { aviso("No se pudo guardar en este dispositivo"); } }
   function tema() { var t = S && S.ajustes.tema; if (t === "claro" || t === "oscuro") document.documentElement.setAttribute("data-tema", t); else document.documentElement.removeAttribute("data-tema"); }
   function ordenados() { return S.est.slice().sort(function (a, b) { return (a.ap + " " + a.no).localeCompare(b.ap + " " + b.no, "es"); }); }
@@ -134,7 +161,7 @@
   function dlgResp() {
     var json = JSON.stringify(S);
     dialogo("<h2>Respaldo</h2><p>Copia este texto y guárdalo donde quieras. Para restaurar, pégalo aquí y pulsa «Restaurar».</p>" + tf("r-t", "Datos del curso (JSON)", json, { area: 1 }) + '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn t" id="r-copiar">Copiar</button><button class="btn t" id="r-bajar">Descargar archivo</button></div><div class="err" id="r-err"></div>', function () {
-      try { var o = JSON.parse($("#r-t").value); if (!o || o.v !== 1 || !o.curso || !Array.isArray(o.est)) throw 1; if (o.est.length > MAX_EST || (o.evals || []).length > MAX_EVAL) { $("#r-err").textContent = "El respaldo supera los límites de la versión Lite."; return false; } var pin = S.ajustes.pin; S = o; S.ajustes = S.ajustes || {}; S.ajustes.pin = pin; S.evals = S.evals || []; S.asis = S.asis || {}; guardar(); tema(); iniciarApp(); aviso("Respaldo restaurado"); } catch (e) { $("#r-err").textContent = "El texto no es un respaldo válido."; return false; }
+      try { var bruto = JSON.parse($("#r-t").value); if (!bruto || !Array.isArray(bruto.est) || !bruto.curso) throw 1; if (bruto.est.length > MAX_EST || (bruto.evals || []).length > MAX_EVAL) { $("#r-err").textContent = "El respaldo supera los límites de la versión Lite."; return false; } var o = normalizar(bruto); if (!o || !o.curso) throw 1; o.ajustes.pin = S.ajustes.pin; S = o; guardar(); tema(); iniciarApp(); aviso("Respaldo restaurado"); } catch (e) { $("#r-err").textContent = "El texto no es un respaldo válido."; return false; }
     }, "Restaurar");
     $("#r-copiar").onclick = function () { var t = $("#r-t"); t.select(); try { navigator.clipboard.writeText(t.value).then(function () { aviso("Copiado"); }, function () { document.execCommand("copy"); aviso("Copiado"); }); } catch (e) { document.execCommand("copy"); aviso("Copiado"); } };
     $("#r-bajar").onclick = function () { var n = "artemis-lite-respaldo-" + hoy() + ".json"; if (window.ArtemisLiteAndroid && window.ArtemisLiteAndroid.guardarArchivo) { window.ArtemisLiteAndroid.guardarArchivo(n, $("#r-t").value); return; } var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([$("#r-t").value], { type: "application/json" })); a.download = n; document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 800); aviso("Descargando el respaldo…"); };
