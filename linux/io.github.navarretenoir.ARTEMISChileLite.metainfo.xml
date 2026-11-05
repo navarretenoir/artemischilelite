@@ -19,7 +19,7 @@
     <p xml:lang="en">ARTEMIS Chile Lite is a simple version of ARTEMIS for Chilean teachers: one class with its student list, daily attendance and a grade book with averages (1.0 to 7.0 scale). Everything stays on your device, offline, no accounts. For a full version, contact the developer.</p>
   </description>
   <url type="homepage">https://github.com/navarretenoir/artemischilelite</url>
-  <url type="vcs-browser">https://gitlab.com/navarretenoir/artemischilelite</url>
+  <url type="vcs-browser">https://github.com/navarretenoir/artemischilelite</url>
   <url type="bugtracker">https://github.com/navarretenoir/artemischilelite/issues</url>
   <screenshots>
     <screenshot type="default"><image>https://raw.githubusercontent.com/navarretenoir/artemischilelite/main/screenshots/1.png</image></screenshot>
