@@ -2,7 +2,7 @@
  * Desarrollada por Javiera Navarrete. Licencia GPL-3.0-or-later. Para la versión completa, contacta a la desarrolladora. */
 (function () {
   "use strict";
-  var MAX_EST = 45, MAX_EVAL = 5, CONTACTO = "navarrete.noir@gmail.com", VERSION = "1.0", KEY = "artemislite.v1";
+  var MAX_EST = 45, MAX_EVAL = 5, CONTACTO = "navarrete.noir@gmail.com", VERSION = "1.0.1", KEY = "artemislite.v1";
   var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var uid = function () { return Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4); };
@@ -148,7 +148,7 @@
       '<p class="sec">Apariencia</p><div class="card"><div class="seg" id="aj-tema"><button data-t="auto" aria-pressed="' + (t === "auto") + '">Sistema</button><button data-t="claro" aria-pressed="' + (t === "claro") + '">Claro</button><button data-t="oscuro" aria-pressed="' + (t === "oscuro") + '">Oscuro</button></div></div>' +
       '<p class="sec">Privacidad y respaldo</p><div class="card"><p class="sub" style="margin-bottom:12px;color:var(--on-v)">Todo se guarda solo en este dispositivo. ' + (S.ajustes.pin ? "El acceso está protegido con PIN." : "Puedes proteger el acceso con un PIN.") + '</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn t" id="aj-pin">' + svg("lock") + (S.ajustes.pin ? "Cambiar o quitar PIN" : "Crear PIN") + '</button><button class="btn t" id="aj-resp">' + svg("save") + 'Respaldo</button><button class="btn o" id="aj-borrar" style="color:var(--err)">Borrar todo</button></div></div>' +
       '<p class="sec">Versión completa</p><div class="card filled"><h2>¿Necesitas más?</h2><p class="sub">ARTEMIS Chile Lite gestiona 1 curso con funciones básicas. <b>Para una versión completa, debes contactarte con la desarrolladora</b> (Javiera Navarrete).</p><div style="margin-top:12px"><a class="btn p" href="mailto:' + CONTACTO + '?subject=ARTEMIS%20Chile%20-%20versi%C3%B3n%20completa" style="text-decoration:none">' + svg("mail") + 'Escribir a la desarrolladora</a></div><p class="sub" style="margin-top:8px">' + CONTACTO + '</p></div>' +
-      '<p class="sec">Acerca de</p><div class="card"><p class="sub" style="color:var(--on-v)">ARTEMIS Chile Lite ' + VERSION + ' · Desarrollada por Javiera Navarrete · Licencia GPL-3.0-or-later · Funciona sin internet y no recopila datos.</p></div>';
+      '<p class="sec">Acerca de</p><div class="card"><p class="sub" style="color:var(--on-v)">ARTEMIS Chile Lite ' + VERSION + ' · Licencia GPL-3.0-or-later · Funciona sin internet y no recopila datos.</p></div>';
     $$("#aj-tema [data-t]").forEach(function (b) { b.onclick = function () { S.ajustes.tema = b.dataset.t; guardar(); tema(); vAjustes(); }; });
     $("#aj-curso").onclick = function () { dlgCurso(true); }; $("#aj-pin").onclick = dlgPin; $("#aj-resp").onclick = dlgResp; $("#aj-borrar").onclick = function () { dialogo("<h2>¿Borrar todo?</h2><p>Se eliminarán el curso, los estudiantes, la asistencia y las notas de este dispositivo. No se puede deshacer.</p>" + tf("b-c", "Escribe BORRAR para confirmar", ""), function () { if (v("b-c") !== "BORRAR") return false; try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); }, "Borrar todo"); };
   }

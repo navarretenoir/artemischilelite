@@ -14,6 +14,6 @@
 #define APP_ALTO            800
 #define APP_COLOR_FONDO     RGB(0xF8, 0xFA, 0xFD)
 #define APP_ACERCA          L"ARTEMIS Chile Lite 1.0 para Windows\n\nVersión simple de ARTEMIS: gestiona un curso con estudiantes, asistencia y notas.\n" \
-                            L"Desarrollada por Javiera Navarrete. Para una versión completa, contacta a la desarrolladora.\n\nFunciona sin internet; los datos quedan en este equipo."
+                            L"Para una versión completa, contacta a la desarrolladora.\n\nFunciona sin internet; los datos quedan en este equipo."
 static const WCHAR *APP_FUERA[] = {L"http://", L"https://", NULL};
 static const WCHAR *APP_PERMITIDOS[] = {NULL};
